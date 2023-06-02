@@ -33,8 +33,10 @@ class ImageLoader {
     Map<String, String>? headers,
     Function()? errorListener,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
-    Function() evictImage,
-  ) {
+    Function() evictImage, {
+    String? projectId,
+    CacheObjectType? cacheObjectType,
+  }) {
     throw UnimplementedError();
   }
 
@@ -51,8 +53,10 @@ class ImageLoader {
     Map<String, String>? headers,
     Function()? errorListener,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
-    Function() evictImage,
-  ) {
+    Function() evictImage, {
+    String? projectId,
+    CacheObjectType? cacheObjectType,
+  }) {
     throw UnimplementedError();
   }
 }
