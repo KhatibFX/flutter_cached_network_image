@@ -4,15 +4,12 @@ import 'dart:ui' as ui;
 import 'dart:ui';
 
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
+import 'package:cached_network_image_platform_interface'
+    '/cached_network_image_platform_interface.dart' as platform show ImageLoader;
+import 'package:cached_network_image_platform_interface'
+    '/cached_network_image_platform_interface.dart' show ImageRenderMethodForWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-
-import 'package:cached_network_image_platform_interface'
-        '/cached_network_image_platform_interface.dart' as platform
-    show ImageLoader;
-import 'package:cached_network_image_platform_interface'
-        '/cached_network_image_platform_interface.dart'
-    show ImageRenderMethodForWeb;
 
 /// ImageLoader class to load images on IO platforms.
 class ImageLoader implements platform.ImageLoader {
@@ -29,8 +26,10 @@ class ImageLoader implements platform.ImageLoader {
     Map<String, String>? headers,
     Function()? errorListener,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
-    Function() evictImage,
-  ) {
+    Function() evictImage, {
+    String? projectId,
+    CacheObjectType? cacheObjectType,
+  }) {
     return _load(
       url,
       cacheKey,
@@ -43,22 +42,27 @@ class ImageLoader implements platform.ImageLoader {
       errorListener,
       imageRenderMethodForWeb,
       evictImage,
+      projectId: projectId,
+      cacheObjectType: cacheObjectType,
     );
   }
 
   @override
   Stream<ui.Codec> loadBufferAsync(
-      String url,
-      String? cacheKey,
-      StreamController<ImageChunkEvent> chunkEvents,
-      DecoderBufferCallback decode,
-      BaseCacheManager cacheManager,
-      int? maxHeight,
-      int? maxWidth,
-      Map<String, String>? headers,
-      Function()? errorListener,
-      ImageRenderMethodForWeb imageRenderMethodForWeb,
-      Function() evictImage) {
+    String url,
+    String? cacheKey,
+    StreamController<ImageChunkEvent> chunkEvents,
+    DecoderBufferCallback decode,
+    BaseCacheManager cacheManager,
+    int? maxHeight,
+    int? maxWidth,
+    Map<String, String>? headers,
+    Function()? errorListener,
+    ImageRenderMethodForWeb imageRenderMethodForWeb,
+    Function() evictImage, {
+    String? projectId,
+    CacheObjectType? cacheObjectType,
+  }) {
     return _load(
       url,
       cacheKey,
@@ -74,6 +78,8 @@ class ImageLoader implements platform.ImageLoader {
       errorListener,
       imageRenderMethodForWeb,
       evictImage,
+      projectId: projectId,
+      cacheObjectType: cacheObjectType,
     );
   }
 
@@ -88,12 +94,13 @@ class ImageLoader implements platform.ImageLoader {
     Map<String, String>? headers,
     Function()? errorListener,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
-    Function() evictImage,
-  ) async* {
+    Function() evictImage, {
+    String? projectId,
+    CacheObjectType? cacheObjectType,
+  }) async* {
     try {
       assert(
-          cacheManager is ImageCacheManager ||
-              (maxWidth == null && maxHeight == null),
+          cacheManager is ImageCacheManager || (maxWidth == null && maxHeight == null),
           'To resize the image with a CacheManager the '
           'CacheManager needs to be an ImageCacheManager. maxWidth and '
           'maxHeight will be ignored when a normal CacheManager is used.');
@@ -104,9 +111,10 @@ class ImageLoader implements platform.ImageLoader {
               maxWidth: maxWidth,
               withProgress: true,
               headers: headers,
-              key: cacheKey)
-          : cacheManager.getFileStream(url,
-              withProgress: true, headers: headers, key: cacheKey);
+              key: cacheKey,
+              projectId: projectId,
+              type: cacheObjectType)
+          : cacheManager.getFileStream(url, withProgress: true, headers: headers, key: cacheKey);
 
       await for (var result in stream) {
         if (result is DownloadProgress) {

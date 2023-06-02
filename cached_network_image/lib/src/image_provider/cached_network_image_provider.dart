@@ -112,6 +112,8 @@ class CachedNetworkImageProvider extends ImageProvider<image_provider.CachedNetw
       errorListener,
       imageRenderMethodForWeb,
       () => PaintingBinding.instance.imageCache.evict(key),
+      projectId: projectId,
+      cacheObjectType: cacheObjectType,
     );
   }
 
@@ -150,6 +152,8 @@ class CachedNetworkImageProvider extends ImageProvider<image_provider.CachedNetw
       errorListener,
       imageRenderMethodForWeb,
       () => PaintingBinding.instance.imageCache.evict(key),
+      projectId: projectId,
+      cacheObjectType: cacheObjectType,
     );
   }
 
