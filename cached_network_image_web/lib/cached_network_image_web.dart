@@ -6,11 +6,9 @@ import 'dart:ui' as ui;
 import 'dart:ui';
 
 import 'package:cached_network_image_platform_interface'
-        '/cached_network_image_platform_interface.dart' as platform
-    show ImageLoader;
+    '/cached_network_image_platform_interface.dart' as platform show ImageLoader;
 import 'package:cached_network_image_platform_interface'
-        '/cached_network_image_platform_interface.dart'
-    show ImageRenderMethodForWeb;
+    '/cached_network_image_platform_interface.dart' show ImageRenderMethodForWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
@@ -29,8 +27,10 @@ class ImageLoader implements platform.ImageLoader {
     Map<String, String>? headers,
     Function()? errorListener,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
-    Function() evictImage,
-  ) {
+    Function() evictImage, {
+    String? projectId,
+    CacheObjectType? cacheObjectType,
+  }) {
     return _load(
       url,
       cacheKey,
@@ -43,6 +43,8 @@ class ImageLoader implements platform.ImageLoader {
       errorListener,
       imageRenderMethodForWeb,
       evictImage,
+      projectId: projectId,
+      cacheObjectType: cacheObjectType,
     );
   }
 
@@ -58,8 +60,10 @@ class ImageLoader implements platform.ImageLoader {
     Map<String, String>? headers,
     Function()? errorListener,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
-    Function() evictImage,
-  ) {
+    Function() evictImage, {
+    String? projectId,
+    CacheObjectType? cacheObjectType,
+  }) {
     return _load(
       url,
       cacheKey,
@@ -75,6 +79,8 @@ class ImageLoader implements platform.ImageLoader {
       errorListener,
       imageRenderMethodForWeb,
       evictImage,
+      projectId: projectId,
+      cacheObjectType: cacheObjectType,
     );
   }
 
@@ -89,8 +95,10 @@ class ImageLoader implements platform.ImageLoader {
     Map<String, String>? headers,
     Function()? errorListener,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
-    Function() evictImage,
-  ) {
+    Function() evictImage, {
+    String? projectId,
+    CacheObjectType? cacheObjectType,
+  }) {
     switch (imageRenderMethodForWeb) {
       case ImageRenderMethodForWeb.HttpGet:
         return _loadAsyncHttpGet(
@@ -120,11 +128,18 @@ class ImageLoader implements platform.ImageLoader {
     int? maxWidth,
     Map<String, String>? headers,
     Function()? errorListener,
-    Function() evictImage,
-  ) async* {
+    Function() evictImage, {
+    String? projectId,
+    CacheObjectType? cacheObjectType,
+  }) async* {
     try {
-      await for (var result in cacheManager.getFileStream(url,
-          withProgress: true, headers: headers)) {
+      await for (var result in cacheManager.getFileStream(
+        url,
+        withProgress: true,
+        headers: headers,
+        projectId: projectId,
+        type: cacheObjectType,
+      )) {
         if (result is DownloadProgress) {
           chunkEvents.add(ImageChunkEvent(
             cumulativeBytesLoaded: result.downloaded,
