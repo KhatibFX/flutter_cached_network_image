@@ -113,9 +113,13 @@ class ImageLoader implements platform.ImageLoader {
               headers: headers,
               key: cacheKey,
               projectId: projectId,
-              type: cacheObjectType)
+              cacheObjectType: cacheObjectType)
           : cacheManager.getFileStream(url,
-              withProgress: true, headers: headers, key: cacheKey, projectId: projectId, type: cacheObjectType);
+              withProgress: true,
+              headers: headers,
+              key: cacheKey,
+              projectId: projectId,
+              cacheObjectType: cacheObjectType);
 
       await for (var result in stream) {
         if (result is DownloadProgress) {
