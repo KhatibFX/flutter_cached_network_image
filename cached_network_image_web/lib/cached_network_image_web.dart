@@ -138,7 +138,7 @@ class ImageLoader implements platform.ImageLoader {
         withProgress: true,
         headers: headers,
         projectId: projectId,
-        type: cacheObjectType,
+        cacheObjectType: cacheObjectType,
       )) {
         if (result is DownloadProgress) {
           chunkEvents.add(ImageChunkEvent(
