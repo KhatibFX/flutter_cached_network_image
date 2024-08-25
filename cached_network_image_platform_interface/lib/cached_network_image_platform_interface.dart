@@ -1,3 +1,4 @@
+/// Platform interface for CachedNetworkImage
 library cached_network_image_platform_interface;
 
 import 'dart:async';
@@ -5,6 +6,9 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+
+/// Listener for errors
+typedef ErrorListener = void Function(Object);
 
 /// Render options for images on the web platform.
 enum ImageRenderMethodForWeb {
@@ -21,27 +25,7 @@ enum ImageRenderMethodForWeb {
 class ImageLoader {
   /// loads the images async and gives the resulted codecs on a Stream. The
   /// Stream gives the option to show multiple images after each other.
-  @Deprecated('use loadBufferAsync instead')
-  Stream<ui.Codec> loadAsync(
-    String url,
-    String? cacheKey,
-    StreamController<ImageChunkEvent> chunkEvents,
-    DecoderCallback decode,
-    BaseCacheManager cacheManager,
-    int? maxHeight,
-    int? maxWidth,
-    Map<String, String>? headers,
-    Function()? errorListener,
-    ImageRenderMethodForWeb imageRenderMethodForWeb,
-    Function() evictImage, {
-    String? projectId,
-    CacheObjectType? cacheObjectType,
-  }) {
-    throw UnimplementedError();
-  }
-
-  /// loads the images async and gives the resulted codecs on a Stream. The
-  /// Stream gives the option to show multiple images after each other.
+  @Deprecated('Use loadImageAsync instead')
   Stream<ui.Codec> loadBufferAsync(
     String url,
     String? cacheKey,
@@ -51,9 +35,27 @@ class ImageLoader {
     int? maxHeight,
     int? maxWidth,
     Map<String, String>? headers,
-    Function()? errorListener,
     ImageRenderMethodForWeb imageRenderMethodForWeb,
-    Function() evictImage, {
+    VoidCallback evictImage, {
+    String? projectId,
+    CacheObjectType? cacheObjectType,
+  }) {
+    throw UnimplementedError();
+  }
+
+  /// loads the images async and gives the resulted codecs on a Stream. The
+  /// Stream gives the option to show multiple images after each other.
+  Stream<ui.Codec> loadImageAsync(
+    String url,
+    String? cacheKey,
+    StreamController<ImageChunkEvent> chunkEvents,
+    ImageDecoderCallback decode,
+    BaseCacheManager cacheManager,
+    int? maxHeight,
+    int? maxWidth,
+    Map<String, String>? headers,
+    ImageRenderMethodForWeb imageRenderMethodForWeb,
+    VoidCallback evictImage, {
     String? projectId,
     CacheObjectType? cacheObjectType,
   }) {
