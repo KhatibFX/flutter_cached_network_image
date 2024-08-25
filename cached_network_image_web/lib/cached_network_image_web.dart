@@ -129,7 +129,7 @@ class ImageLoader implements platform.ImageLoader {
     VoidCallback evictImage, {
     String? projectId,
     CacheObjectType? cacheObjectType,
-  }) async* {
+  }) {
     var streamController = StreamController<ui.Codec>();
 
     try {
