@@ -208,7 +208,7 @@ class CachedNetworkImage extends StatelessWidget {
   final String? projectId;
 
   /// The object type that this image belongs to
-  final CacheObjectType? cacheObjectType;
+  final String? cacheObjectType;
 
   /// CachedNetworkImage shows a network image using a caching mechanism. It also
   /// provides support for a placeholder, showing an error and fading into the

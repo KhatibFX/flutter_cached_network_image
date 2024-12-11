@@ -30,7 +30,7 @@ class ImageLoader implements platform.ImageLoader {
     platform.ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage, {
     String? projectId,
-    CacheObjectType? cacheObjectType,
+    String? cacheObjectType,
   }) {
     return _load(
       url,
@@ -64,7 +64,7 @@ class ImageLoader implements platform.ImageLoader {
     platform.ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage, {
     String? projectId,
-    CacheObjectType? cacheObjectType,
+    String? cacheObjectType,
   }) {
     return _load(
       url,
@@ -97,7 +97,7 @@ class ImageLoader implements platform.ImageLoader {
     platform.ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage, {
     String? projectId,
-    CacheObjectType? cacheObjectType,
+    String? cacheObjectType,
   }) {
     switch (imageRenderMethodForWeb) {
       case platform.ImageRenderMethodForWeb.HttpGet:
@@ -128,7 +128,7 @@ class ImageLoader implements platform.ImageLoader {
     Map<String, String>? headers,
     VoidCallback evictImage, {
     String? projectId,
-    CacheObjectType? cacheObjectType,
+    String? cacheObjectType,
   }) {
     var streamController = StreamController<ui.Codec>();
 

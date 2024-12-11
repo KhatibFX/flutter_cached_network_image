@@ -67,7 +67,7 @@ class CachedNetworkImageProvider
   final String? projectId;
 
   /// The object type that this image belongs to
-  final CacheObjectType? cacheObjectType;
+  final String? cacheObjectType;
 
   @override
   Future<CachedNetworkImageProvider> obtainKey(

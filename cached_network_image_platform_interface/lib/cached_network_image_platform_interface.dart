@@ -38,7 +38,7 @@ class ImageLoader {
     ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage, {
     String? projectId,
-    CacheObjectType? cacheObjectType,
+    String? cacheObjectType,
   }) {
     throw UnimplementedError();
   }
@@ -57,7 +57,7 @@ class ImageLoader {
     ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage, {
     String? projectId,
-    CacheObjectType? cacheObjectType,
+    String? cacheObjectType,
   }) {
     throw UnimplementedError();
   }

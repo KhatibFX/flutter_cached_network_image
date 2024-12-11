@@ -26,7 +26,7 @@ class ImageLoader implements platform.ImageLoader {
     ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage, {
         String? projectId,
-        CacheObjectType? cacheObjectType,
+        String? cacheObjectType,
       }) {
     return _load(
       url,
@@ -60,7 +60,7 @@ class ImageLoader implements platform.ImageLoader {
       ImageRenderMethodForWeb imageRenderMethodForWeb,
       VoidCallback evictImage, {
         String? projectId,
-        CacheObjectType? cacheObjectType,
+        String? cacheObjectType,
       }) {
     return _load(
       url,
@@ -93,7 +93,7 @@ class ImageLoader implements platform.ImageLoader {
     ImageRenderMethodForWeb imageRenderMethodForWeb,
     VoidCallback evictImage, {
     String? projectId,
-    CacheObjectType? cacheObjectType,
+    String? cacheObjectType,
   }) async* {
     try {
       assert(
